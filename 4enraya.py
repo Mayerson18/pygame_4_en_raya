@@ -50,6 +50,7 @@ pos_X,pos_Y=200,100;
 una_vez=True
 turno=True
 ocupado=1
+fin="nadie"
 
 def turnochange( loque ):
 	if (loque==True):
@@ -92,7 +93,7 @@ def posiciones( matriz ,pos):
 
 def validar(x,y,color):
 	global matriz_total
-	fin="nadie"
+	global fin
 	global imagenTextoPresent
 	global rectanguloTextoPresent
 	for i in range(0,8):
@@ -133,16 +134,18 @@ def validar(x,y,color):
 									
 	if fin==color:
 		print fin		
-
+		global fuente
+		global texto1
+		texto1 = fuente.render("El ganador es el jugador "+fin, 0, (255, 255, 255))
 fuente = pygame.font.Font(None, 30)
-texto1 = fuente.render("Texto de pruebas", 0, (255, 255, 255))
-reloj = pygame.time.Clock()
-
+texto1=""
 
 while True:	
-	
-	ventana.blit(fondo,(0,0))			
-	#ventana.blit(texto1,(100,100))
+	if fin=="nadie":		
+		ventana.blit(fondo,(0,0))
+	else:
+		ventana.blit(texto1,(100,100))
+
 	for i in range(0,len(matriz_A)):	
 		if matriz_A[i]!=False:
 			ventana.blit(matriz_A[i],(AM[i]))
